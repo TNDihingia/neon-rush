@@ -14,7 +14,7 @@ export const AdBanner: React.FC<AdBannerProps> = ({
   className = '',
 }) => {
   const adRef = useRef<HTMLModElement | null>(null);
-  const clientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
+  const clientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-2976794750301024';
 
   useEffect(() => {
     if (clientId && typeof window !== 'undefined') {

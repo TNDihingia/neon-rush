@@ -27,7 +27,7 @@ export const viewport: Viewport = {
   themeColor: '#05050f',
 };
 
-const ADSENSE_CLIENT_ID = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
+const ADSENSE_CLIENT_ID = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-2976794750301024';
 
 export default function RootLayout({
   children,

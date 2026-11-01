@@ -23,7 +23,7 @@ export interface AdManagerConfig {
 }
 
 class AdSenseManager {
-  private clientId: string = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || '';
+  private clientId: string = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-2976794750301024';
   private lastInterstitialTime: number = 0;
   private readonly INTERSTITIAL_COOLDOWN_MS: number = 60000; // 60s cooldown to comply with AdSense policy
   private gamesSinceLastAd: number = 0;
