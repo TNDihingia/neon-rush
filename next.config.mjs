@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: false, // Prevents double-mounting canvas animations in dev mode
+  output: 'export',
+  reactStrictMode: false,
   swcMinify: true,
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;

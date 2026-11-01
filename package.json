@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export-zip": "next build && powershell -Command \"Add-Type -AssemblyName System.IO.Compression.FileSystem; if (Test-Path 'neon-rush-html5.zip') { Remove-Item 'neon-rush-html5.zip' -Force }; [System.IO.Compression.ZipFile]::CreateFromDirectory((Resolve-Path 'out'), (Join-Path (Get-Location) 'neon-rush-html5.zip'))\""
   },
   "dependencies": {
     "react": "^18.3.1",

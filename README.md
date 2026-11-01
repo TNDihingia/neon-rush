@@ -106,6 +106,44 @@ vercel
 
 ---
 
+## 🌐 Multi-Platform Publishing Guide
+
+A ready-to-upload standalone HTML5 bundle has been compiled to:
+`neon-rush-html5.zip` (253 KB)
+
+You can regenerate this package anytime by running:
+```bash
+npm run export-zip
+```
+
+### 1. Itch.io
+1. Go to [itch.io/game/new](https://itch.io/game/new).
+2. Set **Kind of project** to: **HTML**.
+3. Under **Uploads**, click **Upload files** and select `neon-rush-html5.zip`.
+4. Check the box: **"This file will be played in the browser"**.
+5. Set Viewport dimensions: **960 x 540** (or tick "Automatically detect size").
+6. Check **Mobile friendly** and **Fullscreen button**.
+7. Set pricing (free with optional tips/donations) and click **Save & View Page**.
+
+### 2. Newgrounds
+1. Go to [newgrounds.com/projects/games/new](https://www.newgrounds.com/projects/games/new).
+2. Under **File Upload**, choose **HTML5 Web Game (.zip)**.
+3. Select `neon-rush-html5.zip`.
+4. Set dimensions to **960 x 540**.
+5. Add tags: `arcade`, `synthwave`, `runner`, `cyberpunk`, `neon`.
+
+### 3. Game Jolt
+1. Go to [gamejolt.com/dashboard/games/add](https://gamejolt.com/dashboard/games/add).
+2. Choose **Browser / HTML5**.
+3. Upload `neon-rush-html5.zip`.
+4. Set display dimensions: **960 x 540**.
+
+### 4. CrazyGames & Poki Developer Portals
+- **CrazyGames**: Submit the live Vercel URL or the `neon-rush-html5.zip` at [developer.crazygames.com](https://developer.crazygames.com).
+- **Poki**: Submit the game demo at [developers.poki.com](https://developers.poki.com).
+
+---
+
 ## ⌨️ Controls Reference
 
 | Action | Desktop | Mobile |
