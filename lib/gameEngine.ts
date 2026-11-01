@@ -166,6 +166,21 @@ export class GameEngine {
     }
   }
 
+  public revive() {
+    // Clear obstacles in player vicinity for safe continuation
+    this.obstacles = this.obstacles.filter(obs => obs.x > this.player.x + 240 || obs.x + obs.width < this.player.x - 40);
+    this.player.y = this.groundY - this.player.height;
+    this.player.vy = 0;
+    this.player.isGrounded = true;
+    this.player.canDoubleJump = true;
+    this.isRunning = true;
+    this.isPaused = false;
+    this.lastTime = performance.now();
+    this.createDoubleJumpRing(this.player.x + this.player.width / 2, this.player.y + this.player.height / 2);
+    this.addFloatingText('REVIVED! +OVERDRIVE', this.width / 2, 160, '#39ff14', 1.4);
+    this.loop(this.lastTime);
+  }
+
   public reset() {
     this.score = 0;
     this.coins = 0;

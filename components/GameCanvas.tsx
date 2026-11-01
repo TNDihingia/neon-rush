@@ -43,6 +43,7 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
   const [finalCoins, setFinalCoins] = useState(0);
   const [maxCombo, setMaxCombo] = useState(1);
   const [isNewHigh, setIsNewHigh] = useState(false);
+  const [hasRevived, setHasRevived] = useState(false);
 
   // Initialize Game Engine
   useEffect(() => {
@@ -159,6 +160,7 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
 
   const handleRestart = useCallback(() => {
     if (engineRef.current) {
+      setHasRevived(false);
       setIsPaused(false);
       setScore(0);
       setCoins(0);
@@ -167,6 +169,13 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
       engineRef.current.start();
     }
   }, []);
+
+  const handleRevive = useCallback(() => {
+    if (engineRef.current && !hasRevived) {
+      setHasRevived(true);
+      engineRef.current.revive();
+    }
+  }, [hasRevived]);
 
   // Keyboard Listeners
   useEffect(() => {
@@ -241,6 +250,8 @@ export const GameCanvas: React.FC<GameCanvasProps> = ({
           maxCombo={maxCombo}
           isNewHigh={isNewHigh}
           onRestart={handleRestart}
+          onRevive={handleRevive}
+          hasRevived={hasRevived}
           onMainMenu={onMainMenu}
           onOpenSkins={onOpenSkins}
         />

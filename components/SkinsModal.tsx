@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { X, Coins, Check, Lock, Palette } from 'lucide-react';
+import { X, Coins, Check, Lock, Palette, PlaySquare } from 'lucide-react';
 import { PlayerSkin } from '@/lib/types';
 import { audio } from '@/lib/audio';
 
@@ -11,6 +11,7 @@ interface SkinsModalProps {
   totalCoins: number;
   onSelectSkin: (skinId: string) => void;
   onUnlockSkin: (skinId: string, cost: number) => boolean;
+  onEarnCoinsAd?: () => void;
   onClose: () => void;
 }
 
@@ -20,6 +21,7 @@ export const SkinsModal: React.FC<SkinsModalProps> = ({
   totalCoins,
   onSelectSkin,
   onUnlockSkin,
+  onEarnCoinsAd,
   onClose,
 }) => {
   const [activeSkinId, setActiveSkinId] = useState<string>(selectedSkinId);
@@ -112,14 +114,25 @@ export const SkinsModal: React.FC<SkinsModalProps> = ({
                 </button>
               )
             ) : (
-              <button
-                onClick={() => handlePurchase(activeSkin)}
-                disabled={totalCoins < activeSkin.cost}
-                className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-neon-pink to-neon-amber text-black font-black text-xs uppercase tracking-wider disabled:opacity-40 flex items-center gap-1.5 shadow-neon-pink hover:scale-105 active:scale-95 transition-all"
-              >
-                <Coins className="w-4 h-4 fill-black" />
-                UNLOCK FOR {activeSkin.cost} COINS
-              </button>
+              <div className="flex flex-col items-center gap-2">
+                <button
+                  onClick={() => handlePurchase(activeSkin)}
+                  disabled={totalCoins < activeSkin.cost}
+                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-neon-pink to-neon-amber text-black font-black text-xs uppercase tracking-wider disabled:opacity-40 flex items-center gap-1.5 shadow-neon-pink hover:scale-105 active:scale-95 transition-all"
+                >
+                  <Coins className="w-4 h-4 fill-black" />
+                  UNLOCK FOR {activeSkin.cost} COINS
+                </button>
+                {onEarnCoinsAd && totalCoins < activeSkin.cost && (
+                  <button
+                    onClick={onEarnCoinsAd}
+                    className="flex items-center gap-1.5 text-xs text-neon-amber hover:underline font-mono"
+                  >
+                    <PlaySquare className="w-3.5 h-3.5" />
+                    <span>Watch ad for +50 coins</span>
+                  </button>
+                )}
+              </div>
             )}
           </div>
         </div>

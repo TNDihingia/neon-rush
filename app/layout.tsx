@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Neon Rush Studio' }],
   manifest: '/manifest.json',
   icons: {
-    icon: '/favicon.ico',
+    icon: '/icon.svg',
   },
   openGraph: {
     title: 'NEON RUSH — Addictive Mini Arcade Game',
@@ -26,6 +27,8 @@ export const viewport: Viewport = {
   themeColor: '#05050f',
 };
 
+const ADSENSE_CLIENT_ID = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
+
 export default function RootLayout({
   children,
 }: {
@@ -33,6 +36,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
+      <head>
+        {/* Google AdSense & H5 Game Placement SDK */}
+        {ADSENSE_CLIENT_ID && (
+          <Script
+            id="google-adsense"
+            async
+            strategy="afterInteractive"
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`}
+            crossOrigin="anonymous"
+          />
+        )}
+      </head>
       <body className="w-screen h-screen overflow-hidden bg-background text-foreground antialiased selection:bg-neon-cyan selection:text-black">
         {children}
       </body>

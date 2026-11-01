@@ -5,6 +5,7 @@ import { GameState, GameSettings, GameStatistics, PlayerSkin, DailyChallenge, Ac
 import { storage } from '@/lib/storage';
 import { achievementsManager } from '@/lib/achievements';
 import { audio } from '@/lib/audio';
+import { adManager } from '@/lib/adsense';
 import { MainMenu } from '@/components/MainMenu';
 import { GameCanvas } from '@/components/GameCanvas';
 import { SettingsModal } from '@/components/SettingsModal';
@@ -189,6 +190,25 @@ export default function Home() {
     return false;
   };
 
+  // Rewarded Ad: Claim 50 free coins
+  const handleEarnCoinsWithAd = () => {
+    adManager.showRewardedAd({
+      rewardName: 'free_coins_50',
+      onRewardEarned: () => {
+        const bonusCoins = 50;
+        const newStats = {
+          ...stats,
+          totalCoins: stats.totalCoins + bonusCoins,
+        };
+        setStats(newStats);
+        storage.saveStats(newStats);
+        audio.playCoin();
+        setUnlockedToast('REWARD CLAIMED: +50 NEON COINS!');
+        setTimeout(() => setUnlockedToast(null), 3500);
+      },
+    });
+  };
+
   if (!mounted) {
     return (
       <div className="w-full h-full flex flex-col items-center justify-center bg-cyber-dark text-white font-mono">
@@ -215,6 +235,7 @@ export default function Home() {
             onOpenSettings={() => setShowSettings(true)}
             onOpenTutorial={() => setShowTutorial(true)}
             onToggleSound={handleToggleSound}
+            onEarnCoinsAd={handleEarnCoinsWithAd}
             stats={stats}
             currentSkin={currentSkin}
             dailyChallenge={dailyChallenge}
@@ -258,6 +279,7 @@ export default function Home() {
           totalCoins={stats.totalCoins}
           onSelectSkin={handleSelectSkin}
           onUnlockSkin={handleUnlockSkin}
+          onEarnCoinsAd={handleEarnCoinsWithAd}
           onClose={() => setShowSkins(false)}
         />
       )}
